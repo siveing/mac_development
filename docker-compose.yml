@@ -112,7 +112,21 @@ services:
       - "6802:8025"    # Web UI
     restart: always
 
+  # RABBITMQ Service
+  rabbitmq:
+    image: rabbitmq:3-management
+    container_name: rabbitmq
+    ports:
+      - "5672:5672" # AMQP protocol port
+      - "15672:15672" # Management UI port
+    environment:
+      - RABBITMQ_DEFAULT_USER=admin
+      - RABBITMQ_DEFAULT_PASS=**********
+    volumes:
+      - rabbitmq_data:/var/lib/rabbitmq
+
 volumes:
   postgres_data:
   mysql_data:
   mongodb_data:
+  rabbitmq_data:
